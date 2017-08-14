@@ -14,7 +14,7 @@ html, body{
 .stage {
     position: relative;
     width: 100%;
-    height: 680px;
+    height: 100%;
 }
 /* stage -- end*/
 
@@ -25,6 +25,41 @@ html, body{
     height: 100%;
     overflow: hidden;
     background-color: #ddd;
+
+    @at-root{
+        .img-figure{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 300px;
+            margin: 0;
+            padding: 30px;
+            background-color: #fff;
+            box-sizing: border-box;
+            cursor: pointer;
+            transform-style: preerve-3d;
+
+            &.is-inverse{
+                transform: rotateY(180deg);
+            }
+
+            img{
+                width: 100%;
+            }
+
+            figcaption{
+                text-align: center;
+                .img-title{
+                    margin: 20px 0 0;
+                    color: #a7a0a2;
+                    font-size: 16px;
+                }
+            }
+        }
+
+
+    }
 }
 /* image -- end*/
 
