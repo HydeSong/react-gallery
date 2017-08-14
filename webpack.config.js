@@ -1,67 +1,27 @@
-/*
- * Webpack development server configuration
- *
- * This file is set up for serving the webpack-dev-server, which will watch for changes and recompile as required if
- * the subfolder /webpack-dev-server/ is visited. Visiting the root will not automatically reload.
- */
-'use strict';
-var webpack = require('webpack');
+const path=require('path');
+const args=require('minimist')(process.argv.slice(2));
 
-module.exports = {
+const allowedEnvs=['dev','dist','test'];
 
-  output: {
-    filename: 'main.js',
-    publicPath: '/assets/'
-  },
+let env;
+if(args._.length>0 && args._.indexOf('start')!=-1){
+	env=dev;
+}else if(args.env){
+	env=args.env;
+}else{
+	env='dev'
+}
 
-  cache: true,
-  debug: true,
-  devtool: 'sourcemap',
-  entry: [
-      'webpack/hot/only-dev-server',
-      './src/components/ReactGalleryApp.js'
-  ],
+process.env.REACT_WEBPACK_ENV = env;
 
-  stats: {
-    colors: true,
-    reasons: true
-  },
+function buildConfig(wantedEnv) {
+	let isValid = wantedEnv && wantedEnv.length > 0 && allowedEnvs.indexOf(wantedEnv) !== -1;
+	let validEnv = isValid ? wantedEnv : 'dev';
+	let config = require(path.join(__dirname, 'cfg/' + validEnv));
+	return config;
+}
+module.exports=buildConfig(env);
 
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
-    alias: {
-      'styles': __dirname + '/src/styles',
-      'mixins': __dirname + '/src/mixins',
-      'components': __dirname + '/src/components/'
-    }
-  },
-  module: {
-    preLoaders: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      loader: 'eslint-loader'
-    }],
-    loaders: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      loader: 'react-hot!babel-loader'
-    }, {
-      test: /\.scss/,
-      loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 2 version"]}!sass-loader?outputStyle=expanded'
-    }, {
-      test: /\.css$/,
-      loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 2 version"]}'
-    },{
-        test: /\.json$/,
-        loader: 'json-loader'
-    },{
-      test: /\.(png|jpg|woff|woff2)$/,
-      loader: 'url-loader?limit=8192'
-    }]
-  },
 
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ]
 
-};
+

@@ -1,0 +1,107 @@
+yeoman构建架构->react-webpack
+npm install
+npm run start
+打开http://localhost:8088
+
+
+依赖模块：
+	配置 Babel
+		.babelrc
+	
+	1、babel手册=>https://github.com/thejameskyle/babel-handbook/blob/master/translations/zh-Hans/README.md
+		babel-core
+		babel-eslint
+		babel-loader
+		babel-polyfill
+		babel-preset-es2015
+		babel-preset-react
+		
+	2、bower-webpack-plugin
+			https://www.npmjs.com/package/bower-webpack-plugin 看文档
+			the plugin is active, you can require bower modules using require.
+
+		var BowerWebpackPlugin = require("bower-webpack-plugin");
+		module.exports = {
+  			module:  {
+    				loaders: [
+      					{
+        					test:   /\.css$/,
+        					loader: "style-loader!css-loader"
+      					}
+    				]
+  			},
+  			plugins: [new BowerWebpackPlugin()]
+		};
+
+	测试
+	3、chai 测试=>后面看看
+	   mocha
+	   isparta-instrumenter-loader
+	   karma
+	   phantomjs-prebuilt
+	   react-addons-test-utils
+	   
+	4、copyfiles=>https://www.npmjs.com/package/copyfiles
+		复制一些文件，给它一堆参数，最后一个是出目录。
+		例：copyfiles -f ./foo/*.txt ./foo/bar/*.txt out
+			will put a.txt and b.txt into out 去掉路径
+
+	5、eslint
+		http://eslint.cn/docs/user-guide/configuring
+		JavaScript and JSX 校验工具可插拔
+	6、eslint-plugin-react 
+		React specific linting rules for ESLint
+	7、glob
+		https://www.npmjs.com/package/glob
+	8、null-loader
+		A loader that returns an empty module.
+	9、url-loader
+		3种情况https://www.npmjs.com/package/url-loader
+	10、postcss
+		https://www.npmjs.com/package/postcss
+		Tool for transforming styles with JS plugins
+	11、core-js 
+		https://www.npmjs.com/package/core-js
+	12、normalize.css 
+		https://www.npmjs.com/package/normalize.css
+		A modern alternative to CSS resets
+	13、react-hot-loader 
+		https://www.npmjs.com/package/react-hot-loader
+		http://gaearon.github.io/react-hot-loader/getstarted/
+	14、postcss
+		https://www.npmjs.com/package/postcss
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
